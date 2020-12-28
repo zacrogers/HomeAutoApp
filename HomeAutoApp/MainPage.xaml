@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HomeAutoApp.MainPage">
+
+    <StackLayout>
+        <Grid VerticalOptions="FillAndExpand"
+              HorizontalOptions="Center"
+              BackgroundColor="White">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="Button1" 
+                    Grid.Row="0" 
+                    Grid.Column="0"
+                    Text="1"
+                    Clicked="Button1_Clicked"/>
+
+            <Button x:Name="Button2"  
+                    Grid.Row="0" 
+                    Grid.Column="1"
+                    Text="2"
+                    Clicked="Button2_Clicked"/>
+
+            <Button x:Name="Button3"  
+                    Grid.Row="1" 
+                    Grid.Column="0"
+                    Text="3"
+                    Clicked="Button3_Clicked"/>
+
+            <Button x:Name="Button4"  
+                    Grid.Row="1" 
+                    Grid.Column="1"
+                    Text="4"
+                    Clicked="Button4_Clicked"/>
+        </Grid>
+    </StackLayout>
+
+</ContentPage>
