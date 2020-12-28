@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,21 @@ namespace HomeAutoApp
     public class PowerNode
     {
         #region Constructor
-        public PowerNode(string baseUrl, int numChannels)
+        public PowerNode(string name, string baseUrl, int numChannels)
         {
+            Name = name;
             BaseUrl = baseUrl;
             NumChannels = numChannels;
         }
         #endregion
 
-        string BaseUrl { set; get; }
-        int NumChannels { set; get; }
+        #region Properties
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+        public string BaseUrl { set; get; }
+        public int NumChannels { set; get; }
+        public string Name { set; get; }
+        #endregion
 
         public List<bool> getStates() 
         {
@@ -46,7 +53,7 @@ namespace HomeAutoApp
 
         public void channelOn(int channel)
         {
-            if(channel > 0 && channel < NumChannels)
+            if(channel > 0 && channel < NumChannels+1)
             {
                 Scraper.getHtml($"{BaseUrl}/relay_{channel}_on");
             }
@@ -54,7 +61,7 @@ namespace HomeAutoApp
 
         public void channelOff(int channel)
         {
-            if (channel > 0 && channel < NumChannels)
+            if (channel > 0 && channel < NumChannels+1)
             {
                 Scraper.getHtml($"{BaseUrl}/relay_{channel}_off");
             }

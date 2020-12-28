@@ -5,12 +5,13 @@
     <ContentPage.Content>
       <StackLayout>
             <Entry x:Name="NameEntry"
-                   Placeholder="Name"
-                   Completed="NameEntry_Completed"/>
+                   Placeholder="Name"/>
           
             <Entry x:Name="IpEntry" 
-                   Placeholder="Ip"
-                   Completed="IpEntry_Completed"/>
+                   Placeholder="Ip"/>
+
+            <Button Text="Save"
+                    Clicked="Button_Clicked"/>
         </StackLayout>
   </ContentPage.Content>
 </ContentPage>

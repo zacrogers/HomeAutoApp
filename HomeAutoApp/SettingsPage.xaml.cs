@@ -19,14 +19,21 @@ namespace HomeAutoApp
             this.Title = "Settings";
         }
 
-        private void NameEntry_Completed(object sender, EventArgs e)
+
+        private void Button_Clicked(object sender, EventArgs e)
         {
+            PowerNode node = new PowerNode(NameEntry.Text, IpEntry.Text, 4);
 
-        }
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                conn.CreateTable<PowerNode>();
+                var numRows = conn.Insert(node);
 
-        private void IpEntry_Completed(object sender, EventArgs e)
-        {
-
+                if(numRows > 0)
+                {
+                    DisplayAlert("Success", $"{NameEntry.Text} Node added", "Ok");
+                }
+            }
         }
     }
 }
