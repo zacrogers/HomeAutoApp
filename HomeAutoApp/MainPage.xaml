@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HomeAutoApp.MainPage">
 
-    <StackLayout>
+    <StackLayout BackgroundColor="#373c47">
+        <!--#region Button grid -->
         <Grid x:Name="ButtonGrid"              
               VerticalOptions="FillAndExpand"
               HorizontalOptions="Center"
@@ -62,6 +63,43 @@
                     Padding="10"
                     Clicked="Button4_Clicked"/>
         </Grid>
+        <!--#endregion-->
+
+        <!--#region Sensor val grid -->  
+        <Grid x:Name="SensorValGrid"
+              HorizontalOptions="Center"
+              Padding="20"
+              BackgroundColor="#1E2533">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="LightLabel"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Text="{Binding light}"
+                   TextColor="White"/>
+            
+            <Label x:Name="TempLabel"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   Text="{Binding sensorVals[1]}"
+                   TextColor="White"/>
+            
+            <Label x:Name="HumidLabel"
+                   Grid.Row="0"
+                   Grid.Column="2"
+                   Text="Humidity"                    
+                   TextColor="White"/>
+        </Grid>
+        <!--#endregion-->
     </StackLayout>
 
 </ContentPage>

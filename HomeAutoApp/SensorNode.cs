@@ -1,12 +1,15 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using SQLite;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HomeAutoApp
 {
-    private readonly int _numSensors = 3;
     public class SensorNode
     {
+        private readonly int _numSensors = 3;
         public SensorNode(string name, string baseUrl)
         {
             Name = name;
@@ -16,7 +19,7 @@ namespace HomeAutoApp
         public string BaseUrl { set; get; }
         public string Name { set; get; }
 
-        public List<string> getStates()
+        public List<string> getValues()
         {
             List<string> sensorVals = new List<string>();
 
@@ -34,10 +37,10 @@ namespace HomeAutoApp
             foreach (int index in Enumerable.Range(_numSensors, _numSensors))
             {
                 var cell = query.ElementAt(index);
-                states.Add(cell.CellText);
+                sensorVals.Add(cell.CellText);
             }
 
-            return states;
+            return sensorVals;
         }
     }
 }

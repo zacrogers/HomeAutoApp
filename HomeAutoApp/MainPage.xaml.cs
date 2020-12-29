@@ -16,12 +16,20 @@ namespace HomeAutoApp
         public string onColor = "00662C";
         public string offColor = "95110F";
 
+        public List<string> sensorVals;
+
+        public string light = "Test";
+
         Color[] buttonColors = { };
 
         public MainPage()
         {
             powerNode = new PowerNode("Bedroom", "http://192.168.1.79", 4);
-            //sensorNode = new SensorNode("Bedroom", "http://192.168.1.92");
+            sensorNode = new SensorNode("Bedroom", "http://192.168.1.92");
+
+            sensorVals = sensorNode.getValues();
+
+            light = sensorVals[0];
 
             Title = powerNode.Name;
 
