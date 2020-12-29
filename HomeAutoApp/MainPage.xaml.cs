@@ -11,10 +11,8 @@ namespace HomeAutoApp
     public partial class MainPage : ContentPage
     {
         public PowerNode powerNode;
-        string ipAddress = string.Empty;
+        public SensorNode sensorNode;
 
-        //public string onColor = "008F3E";
-        //public string offColor = "BA1512";
         public string onColor = "00662C";
         public string offColor = "95110F";
 
@@ -23,6 +21,8 @@ namespace HomeAutoApp
         public MainPage()
         {
             powerNode = new PowerNode("Bedroom", "http://192.168.1.79", 4);
+            //sensorNode = new SensorNode("Bedroom", "http://192.168.1.92");
+
             Title = powerNode.Name;
 
             InitializeComponent();
