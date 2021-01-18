@@ -29,12 +29,23 @@ namespace HomeAutoApp
 
             sensorVals = sensorNode.getValues();
 
-            light = sensorVals[0];
-
             Title = powerNode.Name;
 
             InitializeComponent();
             updateButtonColors();
+
+            LightLabel.Text = $"Light:{sensorVals[0]}";
+            TempLabel.Text = $"Temp:{sensorVals[1]}";
+            HumidLabel.Text = $"Hum:{sensorVals[2]}";
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            sensorVals = sensorNode.getValues();
+            LightLabel.Text = $"Light:{sensorVals[0]}";
+            TempLabel.Text = $"Temp:{sensorVals[1]}";
+            HumidLabel.Text = $"Hum:{sensorVals[2]}";
         }
 
         void updateButtonColors()

@@ -21,7 +21,7 @@ namespace HomeAutoApp.ViewModels
         public ButtonPageViewModel()
         {
             powerNode = new PowerNode("Bedroom", "http://192.168.1.79", 4);
-            //sensorNode = new SensorNode("Bedroom", "http://192.168.1.92");
+            sensorNode = new SensorNode("Bedroom", "http://192.168.1.92");
 
             ButtonColors = new List<Color>();
 

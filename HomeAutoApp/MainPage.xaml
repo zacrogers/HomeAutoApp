@@ -84,19 +84,16 @@
             <Label x:Name="LightLabel"
                    Grid.Row="0"
                    Grid.Column="0"
-                   Text="{Binding light}"
                    TextColor="White"/>
             
             <Label x:Name="TempLabel"
                    Grid.Row="0"
                    Grid.Column="1"
-                   Text="{Binding sensorVals[1]}"
                    TextColor="White"/>
             
             <Label x:Name="HumidLabel"
                    Grid.Row="0"
                    Grid.Column="2"
-                   Text="Humidity"                    
                    TextColor="White"/>
         </Grid>
         <!--#endregion-->

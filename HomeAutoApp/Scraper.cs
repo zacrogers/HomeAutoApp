@@ -10,28 +10,43 @@ namespace HomeAutoApp
     {
         public static string getHtml(string url)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            string html = string.Empty;
 
-            string data = string.Empty;
-
-            if (response.StatusCode == HttpStatusCode.OK)
+            try
             {
-                Stream receiveStream = response.GetResponseStream();
-                StreamReader readStream = null;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-                if (String.IsNullOrWhiteSpace(response.CharacterSet))
-                    readStream = new StreamReader(receiveStream);
-                else
-                    readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    Stream receiveStream = response.GetResponseStream();
+                    StreamReader readStream = null;
 
-                data = readStream.ReadToEnd();
+                    if (String.IsNullOrWhiteSpace(response.CharacterSet))
+                        readStream = new StreamReader(receiveStream);
+                    else
+                        readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
 
-                response.Close();
-                readStream.Close();
+                    html = readStream.ReadToEnd();
+
+                    response.Close();
+                    readStream.Close();
+                }
+            }
+            catch (WebException webExcp)
+            {
+                WebExceptionStatus status = webExcp.Status;
+
+                if (status == WebExceptionStatus.ProtocolError)
+                {
+                    // Check the HTTP status code.  
+                    HttpWebResponse httpResponse = (HttpWebResponse)webExcp.Response;
+                    Console.WriteLine($"{(int)httpResponse.StatusCode}-{httpResponse.StatusCode}");
+                }
             }
 
-            return data;
+
+            return html;
         }
     }
 }
