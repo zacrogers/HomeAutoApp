@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace HomeAutoApp
+namespace HomeAutoApp.Models
 {
     public static class Scraper
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HomeAutoApp
+namespace HomeAutoApp.Models
 {
     public class PowerNode
     {
@@ -29,23 +29,32 @@ namespace HomeAutoApp
         public List<bool> getStates() 
         {
             List<bool> states = new List<bool>();
-
             string html = Scraper.getHtml($"{BaseUrl}/relay_states");
 
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(html);
-
-            var query = from table in doc.DocumentNode.SelectNodes("//table").Cast<HtmlNode>()
-                        from row in table.SelectNodes("tr").Cast<HtmlNode>()
-                        from cell in row.SelectNodes("th|td").Cast<HtmlNode>()
-                        select new { Table = table.Id, CellText = cell.InnerText };
-
-            /* Looping this way to discard headers */
-            foreach(int index in Enumerable.Range(NumChannels, NumChannels))
+            if (!String.IsNullOrEmpty(html))
             {
-                var cell = query.ElementAt(index);
-                bool val = Convert.ToBoolean(Int32.Parse(cell.CellText));
-                states.Add(val);
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(html);
+
+                var query = from table in doc.DocumentNode.SelectNodes("//table").Cast<HtmlNode>()
+                            from row in table.SelectNodes("tr").Cast<HtmlNode>()
+                            from cell in row.SelectNodes("th|td").Cast<HtmlNode>()
+                            select new { Table = table.Id, CellText = cell.InnerText };
+
+                /* Looping this way to discard headers */
+                foreach (int index in Enumerable.Range(NumChannels, NumChannels))
+                {
+                    var cell = query.ElementAt(index);
+                    bool val = Convert.ToBoolean(Int32.Parse(cell.CellText));
+                    states.Add(val);
+                }
+            }
+            else
+            {
+                foreach (int index in Enumerable.Range(NumChannels, NumChannels))
+                {
+                    states.Add(false);
+                }
             }
 
             return states;

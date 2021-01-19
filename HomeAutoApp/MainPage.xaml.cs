@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using HomeAutoApp.Models;
 
 namespace HomeAutoApp
 {
     public partial class MainPage : ContentPage
     {
+        private int _pageIndex;
+
         public PowerNode powerNode;
         public SensorNode sensorNode;
 
@@ -24,6 +27,25 @@ namespace HomeAutoApp
 
         public MainPage()
         {
+            powerNode = new PowerNode("Bedroom", "http://192.168.1.79", 4);
+            sensorNode = new SensorNode("Bedroom", "http://192.168.1.92");
+
+            sensorVals = sensorNode.getValues();
+
+            Title = powerNode.Name;
+
+            InitializeComponent();
+            updateButtonColors();
+
+            LightLabel.Text = $"Light:{sensorVals[0]}";
+            TempLabel.Text = $"Temp:{sensorVals[1]}";
+            HumidLabel.Text = $"Hum:{sensorVals[2]}";
+        }
+
+        public MainPage(int pageIndex)
+        {
+            _pageIndex = pageIndex;
+
             powerNode = new PowerNode("Bedroom", "http://192.168.1.79", 4);
             sensorNode = new SensorNode("Bedroom", "http://192.168.1.92");
 

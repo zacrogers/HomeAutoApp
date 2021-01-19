@@ -5,6 +5,7 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using System.Text;
 using System.Linq;
+using HomeAutoApp.Models;
 
 namespace HomeAutoApp.ViewModels
 {

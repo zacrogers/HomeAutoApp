@@ -3,15 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HomeAutoApp.SettingsPage">
     <ContentPage.Content>
-      <StackLayout>
-            <Entry x:Name="NameEntry"
-                   Placeholder="Name"/>
-          
-            <Entry x:Name="IpEntry" 
-                   Placeholder="Ip"/>
+        <StackLayout>
+            <ListView x:Name="RoomList"
+                  ItemsSource="{Binding Rooms}"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  HasUnevenRows="true">
 
-            <Button Text="Save"
-                    Clicked="Button_Clicked"/>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="6,4,6,4">
+                                <Entry x:Name="NameEntry"
+                                       Placeholder="{Binding Name}"/>
+                                <Label Text="PowerNode"/>
+
+                                <Entry x:Name="PowerNodeIpEntry"
+                                       Placeholder="{Binding powerNode.BaseUrl}"/>
+
+                                <Label Text="SensorNode"/>
+
+                                <Entry x:Name="SensorNodeIpEntry"
+                                       Placeholder="{Binding sensorNode.BaseUrl}"/>
+
+                                <Button Text="Save"
+                                        Clicked="Button_Clicked"/>                                
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+
+            </ListView>
+
         </StackLayout>
-  </ContentPage.Content>
+    </ContentPage.Content>
 </ContentPage>
