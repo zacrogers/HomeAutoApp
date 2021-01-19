@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
+using System.Windows.Input;
 using HomeAutoApp.Models;
+using Xamarin.Forms;
 
 namespace HomeAutoApp.ViewModels
 {
     public class SettingsPageViewModel : INotifyPropertyChanged
     {
+        private Room selectedRoom;
+
         public SettingsPageViewModel()
         {
             Rooms = new ObservableCollection<Room>();
@@ -28,10 +32,44 @@ namespace HomeAutoApp.ViewModels
 
         }
 
-
+        #region Properties
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public ICommand SaveCommand 
+        { 
+            get
+            {
+                return new Command((e) =>
+                {
+                    var item = (e as Room);
+                    var n = item.Name;
+                    var s = item.sensorNode.BaseUrl;
+                    var p = item.powerNode.BaseUrl;
+
+                });
+
+            }
+        }
+
         public ObservableCollection<Room> Rooms { get; set; }
+
+
+        public Room ListViewSelectedRoom
+        {
+            get { return selectedRoom; }
+
+            set
+            {
+                selectedRoom = value;
+                OnPropertyChanged("ListViewSelectedRoom");
+
+                if(selectedRoom != null)
+                {
+
+                }
+            }
+        }
+        #endregion
 
         void OnPropertyChanged(string name)
         {
